@@ -17,11 +17,11 @@ public class MainActivity extends BaseCsoundActivity implements
 CsoundObjCompletionListener, CsoundValueCacheable {
 
 	public View multiTouchView;
-	int touchIds[] = new int[10];
-	float touchX[] = new float[10];
-	float touchY[] = new float[10];
-	CsoundMYFLTArray touchXPtr[] = new CsoundMYFLTArray[10];
-	CsoundMYFLTArray touchYPtr[] = new CsoundMYFLTArray[10];
+	int touchIds[] = new int[4];
+	float touchX[] = new float[4];
+	float touchY[] = new float[4];
+	CsoundMYFLTArray touchXPtr[] = new CsoundMYFLTArray[4];
+	CsoundMYFLTArray touchYPtr[] = new CsoundMYFLTArray[4];
 
 	protected int getTouchIdAssignment() {
 		for(int i = 0; i < touchIds.length; i++) {

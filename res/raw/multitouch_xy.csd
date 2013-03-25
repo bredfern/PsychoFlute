@@ -26,7 +26,7 @@ kjet = ky*rnd(2000)
 iatt = 0.1
 idetk = 0.1
 kngain = 0.0005
-kvibf = rnd(100)
+kvibf = rnd(1000)
 kvamp = 0.0005
 ifn = 1
 
