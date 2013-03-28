@@ -13,21 +13,21 @@ ga1 init 0
 instr 1
 itie tival
 i_instanceNum = p4
-S_xName sprintf "touch.%d.x", i_instanceNuma1 vco2 ky * .5 * kenv, 60 + (log(1 - kx) * 3000), 0
+S_xName sprintf "touch.%d.x", i_instanceNum
 S_yName sprintf "touch.%d.y", i_instanceNum
 
 kx chnget S_xName
 ky chnget S_yName
-
 kenv linsegr 0, .001, 1, .1, 1, .25, 0
-kamp = ky * .5 * kenv
-kfreq = kx*440
-kjet = ky*rnd(2000)			
+
+kamp = ky * .46 * kenv 
+kfreq = kx*100
+kjet = rnd(900) + ky		
 iatt = 0.1
 idetk = 0.1
-kngain = 0.0005
-kvibf = rnd(1000)
-kvamp = 0.0005
+kngain = 0.005
+kvibf = rnd(10000) + ky
+kvamp = 0.00005
 ifn = 1
 
 asig wgflute kamp, kfreq, kjet, iatt, idetk, kngain, kvibf, kvamp, ifn

@@ -1,21 +1,19 @@
 package com.magickhack.psychoflute;
 
 import java.io.File;
-
 import android.os.Bundle;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnTouchListener;
-
 import com.csounds.CsoundObj;
 import com.csounds.CsoundObjCompletionListener;
 import com.csounds.valueCacheable.CsoundValueCacheable;
-
 import csnd.CsoundMYFLTArray;
+
 
 public class MainActivity extends BaseCsoundActivity implements
 CsoundObjCompletionListener, CsoundValueCacheable {
-
+	
 	public View multiTouchView;
 	int touchIds[] = new int[4];
 	float touchX[] = new float[4];
@@ -40,13 +38,15 @@ CsoundObjCompletionListener, CsoundValueCacheable {
 		}
 		return -1;
 	}
-	
+
 	/** Called when the activity is first created. */
 	@Override
 	public void onCreate(Bundle savedInstanceState) 
 	{
 		super.onCreate(savedInstanceState);
 
+		getWindow().setBackgroundDrawableResource(R.drawable.ic_pentagram);
+		
 		for(int i = 0; i < touchIds.length; i++) 
 		{
 			touchIds[i] = -1;
@@ -55,12 +55,14 @@ CsoundObjCompletionListener, CsoundValueCacheable {
 		}
 
 		multiTouchView = new View(this);
+		
 
 		multiTouchView.setOnTouchListener(new OnTouchListener() 
 		{
 
 			public boolean onTouch(View v, MotionEvent event) 
 			{
+				
 				final int action = event.getAction() & MotionEvent.ACTION_MASK;
 				switch(action) 
 				{
@@ -84,6 +86,7 @@ CsoundObjCompletionListener, CsoundValueCacheable {
 										touchYPtr[id].SetValue(0, touchY[id]);
 										csoundObj.sendScore(String.format("i1.%d 0 -2 %d", id, id));
 									}
+									
 								}
 							}
 						}
@@ -98,7 +101,7 @@ CsoundObjCompletionListener, CsoundValueCacheable {
 								touchX[id] = event.getX(i) / multiTouchView.getWidth();
 								touchY[id] = 1 - (event.getY(i) / multiTouchView.getHeight());
 							}
-				
+							
 						}
 				break;
 					case MotionEvent.ACTION_POINTER_UP:
@@ -119,6 +122,7 @@ CsoundObjCompletionListener, CsoundValueCacheable {
 				return true;
 			}
 		});
+		
 		setContentView(multiTouchView);
 		String csd = getResourceFileAsString(R.raw.multitouch_xy);
 		File f = createTempFile(csd);
