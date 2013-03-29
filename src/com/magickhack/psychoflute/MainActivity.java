@@ -46,6 +46,7 @@ CsoundObjCompletionListener, CsoundValueCacheable {
 		super.onCreate(savedInstanceState);
 
 		getWindow().setBackgroundDrawableResource(R.drawable.ic_pentagram);
+		csoundObj.enableAccelerometer(MainActivity.this);
 		
 		for(int i = 0; i < touchIds.length; i++) 
 		{

@@ -18,15 +18,18 @@ S_yName sprintf "touch.%d.y", i_instanceNum
 
 kx chnget S_xName
 ky chnget S_yName
+kaccelX chnget "accelerometerX" 
+kaccelY chnget "accelerometerY" 
+
 kenv linsegr 0, .001, 1, .1, 1, .25, 0
 
 kamp = ky * .46 * kenv 
-kfreq = kx*100
-kjet = rnd(900) + ky		
+kfreq = kx*100 
+kjet = rnd(900) + ky + kaccelY * 0.001 		
 iatt = 0.1
 idetk = 0.1
 kngain = 0.005
-kvibf = rnd(10000) + ky
+kvibf = rnd(10000) + ky + kaccelX * 0.001
 kvamp = 0.00005
 ifn = 1
 
