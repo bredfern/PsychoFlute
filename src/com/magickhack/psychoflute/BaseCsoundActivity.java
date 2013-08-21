@@ -26,6 +26,8 @@
 
 package com.magickhack.psychoflute;
 
+
+
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileOutputStream;
@@ -36,15 +38,13 @@ import java.io.InputStreamReader;
 import android.app.Activity;
 import android.os.Bundle;
 import android.os.Handler;
-import android.widget.SeekBar;
 
 import com.csounds.CsoundObj;
 
 public class BaseCsoundActivity extends Activity {
 	
-	protected CsoundObj csoundObj = new CsoundObj(true);
+	protected CsoundObj csoundObj = new CsoundObj();
 	protected Handler handler = new Handler();
-	
 	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -59,14 +59,6 @@ public class BaseCsoundActivity extends Activity {
 		csoundObj.stopCsound();
 		
 	}
-	
-	public void setSeekBarValue(SeekBar seekBar, double min, double max, double value) {
-		double range = max - min;
-		double percent = (value - min) / range;
-		
-		seekBar.setProgress((int)(percent * seekBar.getMax()));
-	}
-
 	
 	protected String getResourceFileAsString(int resId) {
 		StringBuilder str = new StringBuilder();

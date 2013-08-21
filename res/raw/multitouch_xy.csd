@@ -1,11 +1,11 @@
 <CsoundSynthesizer>
 <CsOptions>
--o dac -+rtaudio=null -d   -b512
+-o dac -d -b512 -B2048
 </CsOptions>
 <CsInstruments>
 nchnls=2
 0dbfs=1
-ksmps=64
+ksmps=32
 sr = 44100
 
 ga1 init 0
@@ -21,9 +21,9 @@ ky chnget S_yName
 kaccelX chnget "accelerometerX" 
 kaccelY chnget "accelerometerY" 
 
-kenv linsegr 0, .001, 1, .1, 1, .25, 0
+kenv linsegr 0, .0001, 1, .1, 1, .25, 0
 
-kamp = ky * .46 * kenv 
+kamp = .5 * kenv 
 kfreq = kx*100 
 kjet = rnd(900) + ky + kaccelY * 0.001 		
 iatt = 0.1
@@ -41,18 +41,14 @@ endin
 
 instr 2
 
-;kcutoff chnget "cutoff"
-;kresonance chnget "resonance"
-
 kcutoff = 6000
 kresonance = .2
 
 
 a1 moogladder ga1, kcutoff, kresonance
 
-aL, aR reverbsc a1, a1, .72, 5000
 
-outs aL, aR
+outs a1, a1
 
 ga1 = 0
 
