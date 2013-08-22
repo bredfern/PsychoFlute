@@ -120,7 +120,7 @@ CsoundObjCompletionListener, CsoundValueCacheable {
 							touchIds[id] = -1;
 							csoundObj.sendScore(String.format("i-1.%d 0 0 %d", id, id));
 						}
-						getWindow().setBackgroundDrawableResource(R.drawable.ic_pentagram);
+						
 					}
 				break;
 				}
@@ -129,6 +129,7 @@ CsoundObjCompletionListener, CsoundValueCacheable {
 				int color = Color.argb(255, rnd.nextInt(256), rnd.nextInt(256), rnd.nextInt(256));  
 				
 				multiTouchView.setBackgroundColor((int) (event.getX() + event.getY() + color));
+
 				return true;
 			}
 		});
