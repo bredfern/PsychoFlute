@@ -24,7 +24,7 @@
  */
 
 
-package com.magickhack.psychoflute;
+package la.noise.psychoflute;
 
 
 

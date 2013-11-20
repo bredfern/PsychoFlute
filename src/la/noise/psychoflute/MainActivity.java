@@ -1,4 +1,4 @@
-package com.magickhack.psychoflute;
+package la.noise.psychoflute;
 
 import java.io.File;
 import java.util.Random;
@@ -20,7 +20,7 @@ import csnd6.controlChannelType;
 public class MainActivity extends BaseCsoundActivity implements
 CsoundObjCompletionListener, CsoundValueCacheable {
 	
-public View multiTouchView;
+	public View multiTouchView;
 	
 	int touchIds[] = new int[4];
 	float touchX[] = new float[4];
@@ -65,7 +65,9 @@ public View multiTouchView;
 		multiTouchView.setOnTouchListener(new OnTouchListener() {
 
 			public boolean onTouch(View v, MotionEvent event) {
-
+				Random rnd = new Random(); 
+				int color = Color.argb(255, rnd.nextInt(256), rnd.nextInt(256), rnd.nextInt(256));  
+				
 				final int action = event.getAction() & MotionEvent.ACTION_MASK;
 				switch(action) {
 				case MotionEvent.ACTION_DOWN:
@@ -89,6 +91,7 @@ public View multiTouchView;
 									touchYPtr[id].SetValue(0, touchY[id]);
 									
 									csoundObj.sendScore(String.format("i1.%d 0 -2 %d", id, id));
+									multiTouchView.setBackgroundColor((int) (id + id + color));
 								}
 							}
 						}
@@ -119,17 +122,14 @@ public View multiTouchView;
 					if(id != -1) {
 						touchIds[id] = -1;
 						csoundObj.sendScore(String.format("i-1.%d 0 0 %d", id, id));
+						multiTouchView.setBackgroundColor((int) (id + id + color));
 					}
 					
 				}
 					break;
 				}
 				
-				Random rnd = new Random(); 
-				int color = Color.argb(255, rnd.nextInt(256), rnd.nextInt(256), rnd.nextInt(256));  
-				
-				multiTouchView.setBackgroundColor((int) (event.getX() + event.getY() + color));
-				
+				multiTouchView.setBackgroundColor(color);
 				return true;
 			}
 		});
@@ -144,9 +144,7 @@ public View multiTouchView;
 		csoundObj.startCsound(f);
 	}
 
-	public void csoundObjComplete(CsoundObj csoundObj) {
-
-	}
+	public void csoundObjComplete(CsoundObj csoundObj) {}
 	
 	// VALUE CACHEABLE
 
@@ -169,9 +167,7 @@ public View multiTouchView;
 		
 	}
 
-	public void updateValuesFromCsound() {
-		
-	}
+	public void updateValuesFromCsound() {}
 
 	public void cleanup() {
 		for(int i = 0; i < touchIds.length; i++) {
